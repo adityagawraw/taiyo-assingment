@@ -50,9 +50,12 @@ const ContactList = ({
           />
         ))
       ) : (
-        <div>
-          <p>No Contact found</p>
+        <div className="flex justify-center items-center">
+          {/* <img src="/images/close2.png" alt="" className="max-w-8 max-h-8 mr-4"/> */}
+        <div className="text-gray-700 text-xl font-semibold text-center py-3">
+          <p >No Contact found</p>
           <p>Please add contact from create contact button</p>
+        </div>
         </div>
       )}
     </div>
