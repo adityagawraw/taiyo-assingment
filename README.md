@@ -44,3 +44,34 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+ ##  Using "*.module.css" in react.js typescript.
+   a. Install  typescript-plugin-css-modules as dev dependency 
+      npm install -D typescript-plugin-css-modules --save-dev
+
+   b. create a "style.d.ts" in root folder of project.
+       In the file add the following :-
+
+       declare module "*.module.css" {
+         const classes: { [key: string]: string };
+         export default classes;
+        } 
+    c. include this in the tsconfig.json file :-
+        
+        "include": [
+             "src",
+             "styles.d.ts"
+            ],
+                    
+    d. add plugin of typescript-plugin-css-modules in the tsconfig.json:-
+
+        {
+          "compilerOptions": {
+          "plugins": [{ "name": "typescript-plugin-css-modules" }]
+         }
+        }
+    e. in .vscode folder inside settings.json file add:-
+
+        {
+          "typescript.tsdk": "node_modules/typescript/lib",
+          "typescript.enablePromptUseWorkspaceTsdk": true
+        }
