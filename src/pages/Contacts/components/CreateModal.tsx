@@ -32,6 +32,7 @@ const saveContact =()=>{
     alert("Please fill all the fields")
    
 }
+
 if(!openModal.create) return null;
   return (
     <div className={` ${classes.modal}`}>
@@ -70,6 +71,7 @@ if(!openModal.create) return null;
               });
             }}
             type="text"
+            
             className="px-2 text-gray-700 text-lg font-semibold outline-none border border-gray-400 rounded"
           />
         </div>

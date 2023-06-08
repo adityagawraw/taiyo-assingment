@@ -57,7 +57,12 @@ const Contacts = () => {
           Create Contact +{" "}
         </button>
       </div>
-      <ContactList />
+      <ContactList
+        setOpenModal={setOpenModal}
+        setEditData={setEditData}
+        setDeleteData={setDeleteData}
+        setViewData={setViewData}
+      />
       <CreateModal openModal={openModal} setOpenModal={setOpenModal} />
       <EditModal
         editData={editData}
@@ -72,11 +77,11 @@ const Contacts = () => {
         setOpenModal={setOpenModal}
       />
       <ViewData
-      
-      viewData={viewData}
-      setViewData={setViewData}
+        viewData={viewData}
+        setViewData={setViewData}
         openModal={openModal}
-        setOpenModal={setOpenModal}/>
+        setOpenModal={setOpenModal}
+      />
     </div>
   );
 };

@@ -12,7 +12,7 @@ interface Props {
 
 const ViewData = ({openModal,setOpenModal,viewData,setViewData}:Props) => {
 
-    if(!openModal.delete) return null;
+    if(!openModal.view) return null;
     return (
       <div className={` ${classes.modal}`}>
         <div className=" bg-white shadow border-2 border-gray-500 rounded-lg max-w-[450px] w-full px-4 py-2">
@@ -20,7 +20,7 @@ const ViewData = ({openModal,setOpenModal,viewData,setViewData}:Props) => {
             <button
               onClick={() => {
                 setOpenModal((prev) => {
-                  return { ...prev, delete: false };
+                  return { ...prev, view: false };
                 });
               }}
               className="w-fit "

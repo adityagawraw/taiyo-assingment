@@ -1,8 +1,21 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useAppSelector } from "../../../features/store";
 import { Contact } from "../../../features/contact-slice";
+import { OpenModal } from "../Contacts";
 
-const ContactList = () => {
+interface Props {
+  setOpenModal: Dispatch<SetStateAction<OpenModal>>;
+  setDeleteData: Dispatch<SetStateAction<Contact>>;
+  setViewData: Dispatch<SetStateAction<Contact>>;
+  setEditData: Dispatch<SetStateAction<Contact>>;
+}
+
+const ContactList = ({
+  setOpenModal,
+  setDeleteData,
+  setViewData,
+  setEditData,
+}: Props) => {
   const { arr } = useAppSelector((state) => state.contact);
 
   return (
@@ -26,7 +39,15 @@ const ContactList = () => {
       </div>
       {arr.length > 0 ? (
         arr?.map((element, index) => (
-          <ContactRow contact={element} index={index} key={element.id} />
+          <ContactRow
+            setOpenModal={setOpenModal}
+            setEditData={setEditData}
+            setDeleteData={setDeleteData}
+            setViewData={setViewData}
+            contact={element}
+            index={index}
+            key={element.id}
+          />
         ))
       ) : (
         <div>
@@ -40,11 +61,22 @@ const ContactList = () => {
 
 export default ContactList;
 
-interface Props {
+interface RowProps {
   contact: Contact;
   index: number;
+  setOpenModal: Dispatch<SetStateAction<OpenModal>>;
+  setDeleteData: Dispatch<SetStateAction<Contact>>;
+  setViewData: Dispatch<SetStateAction<Contact>>;
+  setEditData: Dispatch<SetStateAction<Contact>>;
 }
-const ContactRow = ({ contact, index }: Props) => {
+const ContactRow = ({
+  contact,
+  index,
+  setOpenModal,
+  setDeleteData,
+  setViewData,
+  setEditData,
+}: RowProps) => {
   return (
     <div
       className={`${
@@ -54,11 +86,46 @@ const ContactRow = ({ contact, index }: Props) => {
       <p className="text-center">{index + 1} </p>
       <p className="text-center">{contact.firstName}</p>
       <p className="text-center"> {contact.lastName}</p>
-      <div className="text-center">{contact.status ? <p >Active</p> : <p>Inactive</p>}</div>
+      <div className="text-center">
+        {contact.status ? <p>Active</p> : <p>Inactive</p>}
+      </div>
       <div className="flex justify-center gap-6 ">
-        <button className="bg-yellow-400 px-3 rounded">Edit</button>
-        <button className="bg-gray-300 text-gray-700 px-3 rounded">View</button>
-        <button className="bg-red-500 text-white px-3 rounded">Delete</button>
+        <button
+          onClick={() => {
+            console.log('edit')
+            setEditData(contact);
+            setOpenModal((prev) => {
+              return { ...prev, edit: true };
+            });
+          }}
+          className="bg-yellow-400 px-3 rounded"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => {
+            console.log('view')
+            setViewData(contact);
+            setOpenModal((prev) => {
+              return { ...prev, view: true };
+            });
+          }}
+          className="bg-gray-300 text-gray-700 px-3 rounded"
+        >
+          View
+        </button>
+        <button
+          onClick={() => {
+            console.log('delete')
+            setDeleteData(contact);
+            setOpenModal((prev) => {
+              return { ...prev, delete: true };
+            });
+          }}
+          className="bg-red-500 text-white px-3 rounded"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
