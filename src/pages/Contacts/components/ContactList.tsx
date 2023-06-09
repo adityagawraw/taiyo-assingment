@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useAppSelector } from "../../../features/store";
 import { Contact } from "../../../features/contact-slice";
 import { OpenModal } from "../Contacts";
+import classes from "../Contact.module.css";
 
 interface Props {
   setOpenModal: Dispatch<SetStateAction<OpenModal>>;
@@ -20,17 +21,17 @@ const ContactList = ({
 
   return (
     <div className="border-2 border-gray-600 rounded px-2 py-4  max-w-[1000px]">
-      <div className="grid grid-cols-[1fr_2fr_2fr_1.5fr_2.5fr] bg-gray-300 py-3 rounded">
-        <p className="text-center text-lg font-semibold text-gray-800">
+      <div className={`${classes.contactRow} bg-gray-300 py-3 rounded`}>
+        <p className={`${classes.slno} text-center text-lg font-semibold text-gray-800`}>
           Sl.No.
         </p>
         <p className="text-center text-lg font-semibold text-gray-800">
           First Name
         </p>
-        <p className="text-center text-lg font-semibold text-gray-800">
+        <p className={`${classes.lname} text-center text-lg font-semibold text-gray-800`}>
           Last Name
         </p>
-        <p className=" text-center text-lg font-semibold text-gray-800">
+        <p className={`${classes.status} text-center text-lg font-semibold text-gray-800`}>
           Status
         </p>
         <p className=" text-center text-lg font-semibold text-gray-800">
@@ -84,15 +85,15 @@ const ContactRow = ({
     <div
       className={`${
         index % 2 == 0 ? `bg-gray-100` : `bg-white`
-      } my-1 grid grid-cols-[1fr_2fr_2fr_1.5fr_2.5fr]  py-1 rounded`}
+      } my-1 ${classes.contactRow} py-1 rounded`}
     >
-      <p className="text-center">{index + 1} </p>
+      <p className={`${classes.slno} text-center`}>{index + 1} </p>
       <p className="text-center">{contact.firstName}</p>
-      <p className="text-center"> {contact.lastName}</p>
-      <div className="text-center">
+      <p className={`${classes.lname} text-center`}> {contact.lastName}</p>
+      <div className={`${classes.status} text-center`}>
         {contact.status ? <p>Active</p> : <p>Inactive</p>}
       </div>
-      <div className="flex justify-center gap-6 ">
+      <div className="flex justify-center gap-2 md:gap-6">
         <button
           onClick={() => {
             console.log('edit')

@@ -1,0 +1,14 @@
+.sidebar{
+    display: none;
+}
+.menu{
+    display: inline;
+}
+@media only screen and (min-width:500px) {
+    .sidebar{
+        display: inline;
+    }
+    .menu{
+        display: none;
+    }
+}

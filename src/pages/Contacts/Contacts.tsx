@@ -7,6 +7,8 @@ import ContactList from "./components/ContactList";
 import DeleteModal from "./components/DeleteModal";
 import ViewData from "./components/ViewData";
 import Sidebar from "../components/Sidebar/Sidebar";
+import classes from "./Contact.module.css";
+import Menu from "../components/Sidebar/Menu";
 
 export interface OpenModal {
   create: boolean;
@@ -40,12 +42,19 @@ const Contacts = () => {
     lastName: "",
     status: false,
   });
-
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   return (
-    <div className="grid grid-cols-[1fr_3.5fr] w-[100vw]">
-        <Sidebar/>
+    <div className={`${classes.contact} w-[100vw]`}>
+      <Sidebar />
       <div className="relative py-3 px-6">
-        <p className="text-3xl font-bold text-gray-700 pb-2 border-b">Contacts</p>
+        <div className="flex justify-between border-b pb-2">
+          <p className="text-3xl font-bold text-gray-700  ">Contacts</p>
+          <button onClick={() => setOpenMenu((prev) => !prev)} className={`${classes.menuButton}`}>
+            <img src="/images/bars.png" alt="" className="max-w-8 max-h-8" />
+          </button>
+        </div>
+        {openMenu && <Menu />}
+
         <div className="flex justify-end py-4 ">
           <button
             onClick={() => {
